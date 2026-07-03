@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Ofertas Especiales</title>
+    </head>
+    <body>
+        <div class="container">
+        <header class="header">
+        <h2>OFERTAS ESPECIALES</h2>
+        <p>Aprovecha nuestras mejores ofertas en alimentos próximos a vencer.</p>
+        </header>
+        <section class="oferta1">
+            <img src="imagenes/pizza.jpg"
+            alt="Pizza Familiar" width="200" />
+            <h3>Pizza Familiar</h3>
+            <p>Precio Original: <del>S/. 40.00</del></p>
+            <p><strong>Precio Oferta: S/. 20.00</strong></p>
+            <p>⚠ Ultimas unidades</p>
+            <button>Comprar</button>
+        </section>
+        <section class="oferta2">
+            <img src="imagenes/pollo.webp"
+            alt="Pollo a la Brasa" width="200" />
+            <h3>Pollo a la Brasa</h3>
+            <p>Precio Original: <del>S/. 55.00</del></p>
+            <p><strong>Precio Oferta: S/. 35.00</strong></p>
+            <p>🔥Solo por hoy!</p>
+            <button>Comprar</button>
+        </section>
+        <section class="oferta3">
+            <img src="imagenes/hamburguesa.webp"
+            alt="Hamburguesa Clasica" width="200" />
+            <h3>Hamburguesa Clasica</h3>
+            <p>Precio Original: <del>S/. 28.00</del></p>
+            <p><strong>Precio Oferta: S/. 18.00</strong></p>
+            <p>⚠ Ultimas unidades</p>
+            <button>Comprar</button>
+        </section>
+        <section class="oferta4">
+            <img src="imagenes/lasagna.webp"
+            alt="Lasaña" width="200" />
+            <h3>Lasaña</h3>
+            <p>Precio Original: <del>S/. 35.00</del></p>
+            <p><strong>Precio Oferta: S/. 22.00</strong></p>
+            <p>🔥Oferta Limitada</p>
+            <button>Comprar</button>
+        </section>
+        <section class="oferta5">
+            <img src="imagenes/ensalada.avif"
+            alt="Ensalada Cesar" width="200" />
+            <h3>Ensalada Cesar</h3>
+            <p>Precio Original: <del>S/. 22.00</del></p>
+            <p><strong>Precio Oferta: S/. 14.00</strong></p>
+            <p>⚠ Ultimas unidades</p>
+            <button>Comprar</button>
+        </section>
+        <section class="botones">
+        <a href="menu.html">Ver Menu</a>
+        <a href="index.html">Volver al Inicio</a>
+        </section>
+        <footer class="footer">
+            <p>
+            📧 contacto@foodrescue.com
+            </p>
+            <p>
+            Facebook |
+            Instagram |
+            WhatsApp
+            </p>
+            <p>
+            © 2026 Food Rescue
+            </p>
+        </footer>
+        </div>
+    </body>
+    <style>
+    @keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+    }
+    @keyframes bajar{
+    from{
+        opacity:0;
+        transform:translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+    }
+    @keyframes subir{
+    from{
+
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+    }
+    :root{
+        --colorPrincipal:#2E8B57;
+        --colorFondo:#E8F5E9;
+        --colorBlanco:#FFFFFF;
+        --colorTexto:#333333;
+    }
+    body{
+        margin:0;
+        font-family:Arial, Helvetica, sans-serif;
+        background:var(--colorFondo);
+        color:var(--colorTexto);
+    }
+    h2{
+        font-size:32px;
+        font-weight:bold;
+        color:white;
+    }
+    h3{
+        color:var(--colorPrincipal);
+    }
+    p{
+        font-size:16px;
+        color:var(--colorTexto);
+    }
+    button{
+        padding:10px 20px;
+        border:none;
+        border-radius:5px;
+        animation: aparecer 1s ease;
+        font-size:16px;
+        font-weight:bold;
+        background:var(--colorPrincipal);
+        color:white;
+        transition: opacity .3s;
+    }
+    a{
+        color:var(--colorPrincipal);
+        text-decoration:none;
+        font-weight:bold;
+        transition: color .3s;
+    }
+    a:hover{
+        color:black;
+    }
+    .container{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:auto 1fr 1fr 1fr auto auto;
+        grid-template-areas:    
+        "header header"
+        "oferta1 oferta4"
+        "oferta2 oferta5"
+        "oferta3 ."
+        "botones botones"
+        "footer footer";
+        min-height:100vh;
+    }
+    .header{
+        grid-area:header;
+        background:var(--colorPrincipal);
+        color:white;
+        padding:25px;
+        text-align:center;
+        font-size:20px;
+        animation: bajar .8s ease;
+    }
+    .header p{
+        color:white;
+    }
+    .oferta1{
+        grid-area:oferta1;
+    }
+    .oferta2{
+        grid-area:oferta2;
+    }
+    .oferta3{
+        grid-area:oferta3;
+    }
+    .oferta4{
+        grid-area:oferta4;
+    }
+    .oferta5{
+        grid-area:oferta5;
+    }
+    .oferta1,
+    .oferta2,
+    .oferta3,
+    .oferta4,
+    .oferta5{
+        background:white;
+        padding:20px;
+        margin:15px;
+        border-radius:10px;
+        box-shadow:0px 2px 8px lightgray;
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        transition: transform .3s, box-shadow .3s;
+        animation: aparecer .8s ease;
+    }
+    .oferta1:hover,
+    .oferta2:hover,
+    .oferta3:hover,
+    .oferta4:hover,
+    .oferta5:hover{
+        transform:translateY(-5px);
+        box-shadow:0px 8px 18px lightgray;
+    }
+    img{
+        width:200px;
+        height:140px;
+        object-fit:cover;
+        border-radius:8px;
+        transition: transform .3s;
+    }
+    img:hover{
+        transform:scale(1.05);
+    }
+    .botones{
+        grid-area:botones;
+        display:flex;
+        justify-content:center;
+        gap:20px;
+        padding:20px;
+        flex-wrap:wrap;
+    }
+    .footer{
+        grid-area:footer;
+        background:var(--colorPrincipal);
+        color:white;
+        text-align:center;
+        padding:10px;
+        animation: subir .8s ease;
+    }
+    .footer p{
+        color:white;
+    }
+    /* TABLETS  */
+    @media (max-width:768px){
+        .container{
+            grid-template-columns:1fr;
+            grid-template-areas:
+            "header"
+            "oferta1"
+            "oferta2"
+            "oferta3"
+            "oferta4"
+            "oferta5"
+            "botones"
+            "footer";
+        }
+    }
+    /* CELULARES */
+    @media (max-width:480px){
+        h2{
+            font-size:26px;
+        }
+        img{
+            width:100%;
+            height:auto;
+        }
+        .botones{
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+        }
+    }
+    </style>
+</html>

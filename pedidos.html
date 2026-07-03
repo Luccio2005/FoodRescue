@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Tabla de Pedidos Realizados</title>
+    </head>
+    <body>
+        <div class="container">
+        <header class="header">
+        <h2>Pedidos Realizados</h2>
+        </header>
+        <main class="tabla">
+        <table border="1">
+            <thead>
+            <tr>
+                <th>N° de Pedido</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Productos Seleccionados</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>001</td>
+                <td>20/06/2026</td>
+                <td>Anahir Marquez</td>
+                <td>Pizza Familiar</td>
+                <td>1</td>
+                <td>S/. 25.00</td>
+                <td>Enviado</td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>21/06/2026</td>
+                <td>Aby Palma</td>
+                <td>Hamburguesa + Papas</td>
+                <td>2</td>
+                <td>S/. 36.00</td>
+                <td>Preparando</td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>22/06/2026</td>
+                <td>Alexi Villafuerte</td>
+                <td>Pollo a la Brasa</td>
+                <td>1</td>
+                <td>S/. 30.00</td>
+                <td>En Proceso</td>
+            </tr>
+            <tr>
+                <td>004</td>
+                <td>23/06/2026</td>
+                <td>Svent Luna</td>
+                <td>Ensalada Cesar</td>
+                <td>3</td>
+                <td>S/. 45.00</td>
+                <td>Enviado</td>
+            </tr>
+            <tr>
+                <td>005</td>
+                <td>24/06/2026</td>
+                <td>Fernanda Guillen</td>
+                <td>Lasaña</td>
+                <td>2</td>
+                <td>S/. 40.00</td>
+                <td>Preparando</td>
+            </tr>
+            </tbody>
+        </table>
+        </main>
+        <section class="botones">
+        <a href="menu.html">Menu de Comidas</a><br><br>
+        <a href="index.html">Volver al Inicio</a>
+        </section>
+        <footer class="footer">
+            <p>
+            📧 contacto@foodrescue.com
+            </p>
+            <p>
+            Facebook |
+            Instagram |
+            WhatsApp
+            </p>
+            <p>
+            © 2026 Food Rescue
+            </p>
+        </footer>
+        </div>
+    </body>
+    <style>
+    @keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+    }
+    @keyframes bajar{
+    from{
+        opacity:0;
+        transform:translateY(-30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+    }
+    @keyframes subir{
+    from{
+
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+    }
+    :root{
+        --colorPrincipal:#2E8B57;
+        --colorFondo:#E8F5E9;
+        --colorBlanco:#FFFFFF;
+        --colorTexto:#333333;
+    }
+    body{
+        margin:0;
+        font-family:Arial, Helvetica, sans-serif;
+        background:var(--colorFondo);
+        color:var(--colorTexto);
+    }
+    h2{
+        font-size:32px;
+        font-weight:bold;
+        color:white;
+    }
+    p{
+        font-size:16px;
+        color:var(--colorTexto);
+    }
+    a{
+        color:var(--colorPrincipal);
+        text-decoration:none;
+        font-weight:bold;
+        transition: color .3s;
+    }
+    a:hover{
+        color:black;
+    }
+    table{
+        font-size:15px;
+        background:white;
+        width:100%;
+        border-collapse:collapse;
+        animation: aparecer .8s ease;
+    }
+    th{
+        font-weight:bold;
+        background:var(--colorPrincipal);
+        color:white;
+        padding:12px;
+        text-align:center;
+    }
+    td{
+        color:var(--colorTexto);
+        padding:12px;
+        text-align:center;
+    }
+    tbody tr{
+        transition:background .3s;
+    }
+    tbody tr:hover{
+        background:#F3FFF6;
+    }
+    .container{
+        display:grid;
+        grid-template-columns:1fr;
+        grid-template-rows:auto 1fr auto auto;
+        grid-template-areas:
+        "header"
+        "tabla"
+        "botones"
+        "footer";
+        min-height:100vh;
+    }
+    .header{
+        grid-area:header;
+        background:var(--colorPrincipal);
+        color:white;
+        padding:25px;
+        text-align:center;
+        font-size:20px;
+        animation: bajar .8s ease;
+    }
+    .header p{
+        color:white;
+    }
+    .tabla{
+        grid-area:tabla;
+        padding:25px;
+    }
+    .botones{
+        grid-area:botones;
+        text-align:center;
+        padding:20px;
+        display:flex;
+        justify-content:center;
+        gap:20px;
+        align-items:center;
+        flex-wrap:wrap;
+    }
+    .botones a{
+        margin:0 15px;
+    }
+    .footer{
+        grid-area:footer;
+        background:var(--colorPrincipal);
+        color:white;
+        text-align:center;
+        padding:10px;
+        animation: subir .8s ease;
+    }
+    .footer p{
+        color:white;
+    }
+    /* TABLETS  */
+    @media (max-width:768px){
+        .tabla{
+            overflow-x:auto;
+        }
+        table{
+            min-width:700px;
+        }
+    }
+    /* CELULARES  */
+    @media (max-width:480px){
+        h2{
+            font-size:26px;
+        }
+        .botones{
+            flex-direction:column;
+        }
+    }
+    </style>
+</html>

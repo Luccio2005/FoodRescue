@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Rescue - Inicio</title>
+
+<style>
+
+@keyframes aparecer{
+from{
+    opacity:0;
+    transform:translateY(25px);
+}
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+}
+
+@keyframes bajar{
+from{
+    opacity:0;
+    transform:translateY(-30px);
+}
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+}
+
+@keyframes subir{
+from{
+    opacity:0;
+    transform:translateY(30px);
+}
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+}
+
+:root{
+    --colorPrincipal:#2E8B57;
+    --colorFondo:#E8F5E9;
+    --colorBlanco:#FFFFFF;
+    --colorTexto:#333333;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--colorFondo);
+    color:var(--colorTexto);
+}
+
+/* TITULOS */
+
+h1{
+    font-size:38px;
+    color:white;
+}
+
+h2{
+    color:var(--colorPrincipal);
+    font-size:28px;
+}
+
+p{
+    font-size:16px;
+    line-height:1.6;
+}
+
+/* ENLACES */
+
+a{
+    color:var(--colorPrincipal);
+    text-decoration:none;
+    font-weight:bold;
+    transition:color .3s;
+}
+
+a:hover{
+    color:black;
+}
+
+/* BOTONES */
+
+.boton{
+    display:inline-block;
+    background:var(--colorPrincipal);
+    color:white;
+    padding:12px 22px;
+    border-radius:5px;
+    transition:opacity .3s;
+}
+
+.boton:hover{
+    opacity:.8;
+}
+
+/* GRID */
+
+.container{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    grid-template-rows:auto auto 1fr auto;
+
+    grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+
+    min-height:100vh;
+
+}
+
+/* HEADER */
+
+.header{
+
+    grid-area:header;
+
+    background:var(--colorPrincipal);
+
+    text-align:center;
+
+    padding:25px;
+
+    color:white;
+
+    animation:bajar .8s ease;
+
+}
+
+.header img{
+
+    margin-top:10px;
+
+    width:130px;
+
+}
+
+.header p{
+
+    color:white;
+
+}
+
+/* NAV */
+
+.nav{
+
+    grid-area:nav;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+
+    padding:18px;
+
+    box-shadow:0px 2px 8px lightgray;
+
+}
+
+.nav a{
+
+    transition:color .3s;
+
+}
+
+/* MAIN */
+
+.main{
+
+    grid-area:main;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+/* TARJETAS */
+
+section{
+
+    width:90%;
+
+    max-width:950px;
+
+    background:white;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    border-radius:10px;
+
+    box-shadow:0px 2px 8px lightgray;
+
+    animation:aparecer .8s ease;
+
+    transition:transform .3s, box-shadow .3s;
+
+}
+
+section:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0px 8px 18px lightgray;
+
+}
+
+.accesos{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+
+}
+
+/* FOOTER */
+
+.footer{
+
+    grid-area:footer;
+
+    background:var(--colorPrincipal);
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    animation:subir .8s ease;
+
+}
+
+.footer p{
+
+    color:white;
+
+}
+
+/* TABLETS */
+
+@media(max-width:768px){
+
+    .nav{
+
+        gap:20px;
+
+    }
+
+    section{
+
+        width:95%;
+
+    }
+
+}
+
+/* CELULARES */
+
+@media(max-width:480px){
+
+    h1{
+
+        font-size:30px;
+
+    }
+
+    h2{
+
+        font-size:24px;
+
+    }
+
+    .nav{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+    .accesos{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .boton{
+
+        width:80%;
+
+        text-align:center;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header class="header">
+
+<h1>🍽 Food Rescue</h1>
+
+<img src="logo.png"
+alt="Logo Food Rescue">
+
+<p>Rescatando alimentos y reduciendo el desperdicio.</p>
+
+</header>
+
+<nav class="nav">
+
+<a href="index.html">Inicio</a>
+
+<a href="menu.html">Menú</a>
+
+<a href="form_pedido.html">Pedido</a>
+
+<a href="ofertas.html">Ofertas</a>
+
+<a href="pedidos.html">Pedidos</a>
+
+</nav>
+
+<main class="main">
+
+<section>
+
+<h2>Bienvenido</h2>
+
+<p>
+
+Bienvenido a <strong>Food Rescue</strong>, una plataforma dedicada al rescate de alimentos en buen estado provenientes de restaurantes y negocios.
+
+Nuestro objetivo es reducir el desperdicio de comida mientras ofrecemos productos de calidad a precios accesibles para todos.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>¿Quiénes somos?</h2>
+
+<p>
+
+Food Rescue conecta establecimientos de comida con personas interesadas en adquirir alimentos próximos a vencer, promoviendo el ahorro económico y el cuidado del medio ambiente mediante un consumo responsable.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>Accesos rápidos</h2>
+
+<p>
+
+Explora nuestros productos, descubre las mejores ofertas o realiza tu pedido en pocos pasos.
+
+</p>
+
+<div class="accesos">
+
+<a class="boton" href="menu.html">
+🍕 Ver Menú
+</a>
+
+<a class="boton" href="form_pedido.html">
+🛒 Realizar Pedido
+</a>
+
+<a class="boton" href="ofertas.html">
+🔥 Ver Ofertas
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+<footer class="footer">
+
+<p>📧 contacto@foodrescue.com</p>
+
+<p>Facebook | Instagram | WhatsApp</p>
+
+<p>© 2026 Food Rescue</p>
+
+</footer>
+
+</div>
+
+</body>
+</html>
