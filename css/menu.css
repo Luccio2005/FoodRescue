@@ -1,0 +1,161 @@
+.header h2{
+    color:white;
+    font-size:32px;
+}
+table{
+
+    width:100%;
+    background:white;
+    border-collapse:collapse;
+    animation:aparecer .8s ease;
+
+}
+
+th{
+
+    background:var(--colorPrincipal);
+    color:white;
+    padding:12px;
+
+}
+
+td{
+
+    padding:12px;
+    text-align:center;
+
+}
+
+tbody tr{
+
+    transition:background .3s;
+
+}
+
+tbody tr:hover{
+
+    background:#F3FFF6;
+
+}
+
+.container{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    grid-template-rows:auto 1fr auto auto;
+
+    grid-template-areas:
+
+    "header"
+
+    "tabla"
+
+    "botones"
+
+    "footer";
+
+    min-height:100vh;
+
+}
+
+.header{
+
+    grid-area:header;
+
+    background:var(--colorPrincipal);
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    animation:bajar .8s ease;
+
+}
+
+.header p{
+
+    color:white;
+
+}
+
+.tabla{
+
+    grid-area:tabla;
+
+    padding:25px;
+
+}
+
+.botones{
+
+    grid-area:botones;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    padding:20px;
+
+}
+.buscador{
+
+    display:flex;
+    justify-content:center;
+    margin-bottom:20px;
+
+}
+
+#buscarProducto{
+
+    width:350px;
+    max-width:90%;
+    padding:12px;
+    font-size:16px;
+    border-radius:8px;
+
+}
+/* TABLETS */
+
+@media(max-width:768px){
+
+    .tabla{
+
+        overflow-x:auto;
+
+    }
+
+    table{
+
+        min-width:750px;
+
+    }
+
+}
+
+/* CELULARES */
+
+@media(max-width:480px){
+
+    h2{
+
+        font-size:26px;
+
+    }
+
+    .botones{
+
+        flex-direction:column;
+
+    }
+
+}

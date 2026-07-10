@@ -1,0 +1,100 @@
+    .header h2{
+        color:white;
+        font-size:32px;
+    }
+    table{
+        font-size:15px;
+        background:white;
+        width:100%;
+        border-collapse:collapse;
+        animation: aparecer .8s ease;
+    }
+    th{
+        font-weight:bold;
+        background:var(--colorPrincipal);
+        color:white;
+        padding:12px;
+        text-align:center;
+    }
+    td{
+        color:var(--colorTexto);
+        padding:12px;
+        text-align:center;
+    }
+    tbody tr{
+        transition:background .3s;
+    }
+    tbody tr:hover{
+        background:#F3FFF6;
+    }
+    .container{
+        display:grid;
+        grid-template-columns:1fr;
+        grid-template-rows:auto 1fr auto auto;
+        grid-template-areas:
+        "header"
+        "tabla"
+        "botones"
+        "footer";
+        min-height:100vh;
+    }
+    .header{
+        grid-area:header;
+        background:var(--colorPrincipal);
+        color:white;
+        padding:25px;
+        text-align:center;
+        font-size:20px;
+        animation: bajar .8s ease;
+    }
+    .header p{
+        color:white;
+    }
+    .tabla{
+        grid-area:tabla;
+        padding:25px;
+    }
+    .botones{
+        grid-area:botones;
+        text-align:center;
+        padding:20px;
+        display:flex;
+        justify-content:center;
+        gap:20px;
+        align-items:center;
+        flex-wrap:wrap;
+    }
+    .botones a{
+        margin:0 15px;
+    }
+    .herramientas{
+        display:flex;
+        justify-content:center;
+        gap:20px;
+        flex-wrap:wrap;
+        margin-bottom:20px;
+    }
+#buscarPedido{
+    width:320px;
+}
+#filtroEstado{
+    width:180px;
+}
+    /* TABLETS  */
+    @media (max-width:768px){
+        .tabla{
+            overflow-x:auto;
+        }
+        table{
+            min-width:700px;
+        }
+    }
+    /* CELULARES  */
+    @media (max-width:480px){
+        h2{
+            font-size:26px;
+        }
+        .botones{
+            flex-direction:column;
+        }
+    }
