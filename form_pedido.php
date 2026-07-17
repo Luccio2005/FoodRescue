@@ -56,6 +56,37 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $producto = $_POST["producto"];
     $cantidad = $_POST["cantidad"];
 
+    $nombre = trim($nombre);
+    $direccion = trim($direccion);
+    $telefono = trim($telefono);
+
+    if(!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/", $nombre)){
+        die("<script>
+                alert('Nombre inválido.');
+                window.history.back();
+            </script>");
+    }
+
+    if(strlen($direccion) < 5){
+        die("<script>
+                alert('La dirección es demasiado corta.');
+                window.history.back();
+            </script>");
+    }
+
+    if(!preg_match("/^[0-9]{9}$/", $telefono)){
+        die("<script>
+                alert('El teléfono debe tener exactamente 9 dígitos.');
+                window.history.back();
+            </script>");
+    }
+
+    if($cantidad < 1 || $cantidad > 20){
+        die("<script>
+                alert('Cantidad inválida.');
+                window.history.back();
+            </script>");
+    }
     // Buscar el producto en la BD
     $consulta = "SELECT * FROM productos WHERE nombre='$producto'";
     $resultado = $conexion->query($consulta);

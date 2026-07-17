@@ -1,24 +1,42 @@
 const formulario = document.getElementById("formPedido");
 
 formulario.addEventListener("submit", function(e){
-
-    const telefono = document.getElementById("telefono").value;
-    const cantidad = document.getElementById("cantidad").value;
-
-    if(telefono.length != 9){
-        alert("El teléfono debe tener 9 dígitos.");
+    const nombre = document.getElementById("nombre").value.trim();
+    const direccion = document.getElementById("direccion").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+    const cantidad = Number(document.getElementById("cantidad").value);
+    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+    if(nombre==""){
+        alert("Ingrese su nombre.");
         e.preventDefault();
         return;
     }
-
-    if(cantidad <= 0){
-        alert("Ingrese una cantidad válida.");
+    if(!soloLetras.test(nombre)){
+        alert("El nombre solo puede contener letras.");
         e.preventDefault();
         return;
     }
-
-    const confirmar = confirm("¿Desea registrar este pedido?");
-
+    if(nombre.length<3){
+        alert("El nombre es demasiado corto.");
+        e.preventDefault();
+        return;
+    }
+    if(direccion.length<5){
+        alert("Ingrese una dirección válida.");
+        e.preventDefault();
+        return;
+    }
+    if(!/^[0-9]{9}$/.test(telefono)){
+        alert("El teléfono debe contener exactamente 9 números.");
+        e.preventDefault();
+        return;
+    }
+    if(cantidad<1 || cantidad>20){
+        alert("La cantidad debe estar entre 1 y 20.");
+        e.preventDefault();
+        return;
+    }
+    const confirmar = confirm("¿Desea guardar este pedido?");
     if(!confirmar){
         e.preventDefault();
     }
