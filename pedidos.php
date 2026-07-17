@@ -78,6 +78,7 @@ $resultado = $conexion->query($sql);
         <option value="Todos">Todos</option>
         <option value="Pendiente">Pendiente</option>
         <option value="Entregado">Entregado</option>
+        <option value="Cancelado">Cancelado</option>
         </select>
         </div>
         <br>
@@ -106,7 +107,17 @@ $resultado = $conexion->query($sql);
             <td><?php echo $fila["producto"]; ?></td>
             <td><?php echo $fila["cantidad"]; ?></td>
             <td>S/. <?php echo $fila["total"]; ?></td>
-            <td><?php echo $fila["estado"]; ?></td>
+            <td>
+            <?php
+                if($fila["estado"]=="Pendiente"){
+                    echo "<span class='estado pendiente'> Pendiente</span>";
+                }elseif($fila["estado"]=="Entregado"){
+                    echo "<span class='estado entregado'> Entregado</span>";
+                }else{
+                    echo "<span class='estado cancelado'> Cancelado</span>";
+                }
+            ?>
+            </td>
             <td>
             <?php
                 if($fila["estado"]=="Pendiente"){
