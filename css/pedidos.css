@@ -74,12 +74,25 @@
         flex-wrap:wrap;
         margin-bottom:20px;
     }
-#buscarPedido{
-    width:320px;
-}
-#filtroEstado{
-    width:180px;
-}
+    #buscarPedido{
+        width:320px;
+    }
+    #filtroEstado{
+        width:180px;
+    }
+    .btnCancelar{
+        background:#d32f2f;
+        color:white;
+        padding:8px 14px;
+        border-radius:5px;
+        text-decoration:none;
+        font-weight:bold;
+        transition:.3s;
+    }
+    .btnCancelar:hover{
+        background:#b71c1c;
+        color:white;
+    }
     /* TABLETS  */
     @media (max-width:768px){
         .tabla{

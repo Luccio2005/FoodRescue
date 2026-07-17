@@ -67,12 +67,18 @@
         }
     ?>
 </h2>
+
 <p id="fechaHora"></p>
+
+<p id="mensajePrincipal">
+🌱 Rescatando alimentos y reduciendo el desperdicio.
+</p>
+
 <p>
-    Bienvenido a <strong>Food Rescue</strong>, una plataforma dedicada al rescate de alimentos en buen estado provenientes de restaurantes y negocios.
+    Bienvenido a <strong>Food Rescue</strong>,
+    una plataforma dedicada al rescate de alimentos en buen estado provenientes de restaurantes y negocios.
     Nuestro objetivo es reducir el desperdicio de comida mientras ofrecemos productos de calidad a precios accesibles para todos.
 </p>
-</section>
 
 <section>
 

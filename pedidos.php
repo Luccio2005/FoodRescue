@@ -2,6 +2,11 @@
 session_start();
 include("conexion.php");
 
+if(!isset($_SESSION["id_usuario"])){
+    header("Location: login.php");
+    exit();
+}
+
 $id_usuario = $_SESSION["id_usuario"];
 $sql = "SELECT
 p.id_pedido,
@@ -87,6 +92,7 @@ $resultado = $conexion->query($sql);
                 <th>Cantidad</th>
                 <th>Total</th>
                 <th>Estado</th>
+                <th>Acción</th>
             </tr>
             </thead>
             <tbody>
@@ -101,6 +107,20 @@ $resultado = $conexion->query($sql);
             <td><?php echo $fila["cantidad"]; ?></td>
             <td>S/. <?php echo $fila["total"]; ?></td>
             <td><?php echo $fila["estado"]; ?></td>
+            <td>
+            <?php
+                if($fila["estado"]=="Pendiente"){
+            ?>
+            <a href="cancelar_pedido.php?id=<?php echo $fila["id_pedido"]; ?>"
+                class="btnCancelar" 
+                onclick="return confirm('¿Seguro que deseas cancelar este pedido?');">
+                Cancelar </a>
+            <?php
+                }else{
+                    echo "-";
+                }
+            ?>
+            </td>
             </tr>
             <?php
             }

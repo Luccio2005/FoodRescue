@@ -4,8 +4,8 @@ include("conexion.php");
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
-    $usuario=$_POST["usuario"];
-    $contrasena=$_POST["contrasena"];
+    $usuario = trim($_POST["usuario"]);
+    $contrasena = trim($_POST["contrasena"]);
 
     $sql="SELECT * FROM usuarios
           WHERE usuario='$usuario'
