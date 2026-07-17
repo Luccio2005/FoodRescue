@@ -122,6 +122,8 @@ $resultado = $conexion->query($sql);
             <?php
                 if($fila["estado"]=="Pendiente"){
             ?>
+            <a href="form_pedido.php?editar=<?php echo $fila["id_pedido"]; ?>"
+                class="btnEditar"> Editar </a> <br><br>
             <a href="cancelar_pedido.php?id=<?php echo $fila["id_pedido"]; ?>"
                 class="btnCancelar" 
                 onclick="return confirm('¿Seguro que deseas cancelar este pedido?');">

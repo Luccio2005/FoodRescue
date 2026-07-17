@@ -10,6 +10,42 @@ if(!isset($_SESSION["id_usuario"])){
 
 $sqlProductos = "SELECT nombre, precio_oferta FROM productos";
 $resultadoProductos = $conexion->query($sqlProductos);
+$modoEditar = false;
+$idPedido = "";
+$nombreCliente = "";
+$direccionCliente = "";
+$telefonoCliente = "";
+$productoSeleccionado = "";
+$cantidadSeleccionada = "";
+
+if(isset($_GET["editar"])){
+    $modoEditar = true;
+    $idPedido = $_GET["editar"];
+    $sqlEditar = "SELECT
+                    p.id_pedido,
+                    p.nombre_cliente,
+                    p.direccion,
+                    p.telefono,
+                    d.cantidad,
+                    pr.nombre
+                FROM pedidos p
+                INNER JOIN detalle_pedido d
+                ON p.id_pedido=d.id_pedido
+                INNER JOIN productos pr
+                ON d.id_producto=pr.id_producto
+                WHERE p.id_pedido='$idPedido'
+                AND p.id_usuario='".$_SESSION["id_usuario"]."'";
+    $resultadoEditar = $conexion->query($sqlEditar);
+    if($resultadoEditar->num_rows>0){
+        $pedido = $resultadoEditar->fetch_assoc();
+        $nombreCliente = $pedido["nombre_cliente"];
+        $direccionCliente = $pedido["direccion"];
+        $telefonoCliente = $pedido["telefono"];
+        $productoSeleccionado = $pedido["nombre"];
+        $cantidadSeleccionada = $pedido["cantidad"];
+    }
+
+}
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
@@ -82,7 +118,17 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 </a>
             </div>
             </div>
-            <h2>REALIZAR PEDIDO</h2>
+            <h2>
+            <?php
+                if($modoEditar){
+                    echo "EDITAR PEDIDO";
+
+                }else{
+                    echo "REALIZAR PEDIDO";
+                }
+            ?>
+            </h2>
+
             <div class="usuario">
             <?php
                 if(isset($_SESSION["usuario"])){
@@ -104,20 +150,30 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 <main class="formulario">
 
-<form action="" method="POST" id="formPedido">
-
+<form action="<?php echo $modoEditar ? 'actualizar_pedido.php' : ''; ?>" 
+    method="POST" id="formPedido">
+    <?php
+        if($modoEditar){
+    ?>
+        <input type="hidden" name="id_pedido"
+        value="<?php echo $idPedido; ?>"> <?php
+        }
+    ?>
 <label>Nombre del cliente</label>
-<input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" required>
+<input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre" 
+    value="<?php echo $nombreCliente; ?>"required>
 
 <br>
 
 <label>Dirección</label>
-<input type="text" name="direccion" id="direccion" placeholder="Ingrese su dirección" required>
+<input type="text" name="direccion" id="direccion" placeholder="Ingrese su dirección" 
+    value="<?php echo $direccionCliente; ?>"required>
 
 <br>
 
 <label>Teléfono</label>
-<input type="tel" name="telefono" id="telefono" placeholder="999999999" required>
+<input type="tel" name="telefono" id="telefono" placeholder="999999999" 
+value="<?php echo $telefonoCliente; ?>"required>
 
 <br>
 
@@ -131,10 +187,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     value="<?php echo $productoBD["nombre"]; ?>"
     data-precio="<?php echo $productoBD["precio_oferta"]; ?>"
     <?php
-    if(isset($_GET["producto"]) && $_GET["producto"]==$productoBD["nombre"]){
-    echo "selected";
-    }
-    ?>
+        if(
+        (isset($_GET["producto"]) && $_GET["producto"]==$productoBD["nombre"])
+        ||
+        ($modoEditar && $productoSeleccionado==$productoBD["nombre"])
+        ){
+            echo "selected";
+        }
+        ?>
 >
     <?php echo $productoBD["nombre"]; ?>
 </option>
@@ -159,24 +219,32 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 <label>Cantidad</label>
 
-<input type="number" name="cantidad" id="cantidad" min="1" max="20" required>
-
+<input type="number" name="cantidad" id="cantidad" min="1" max="20" 
+    value="<?php echo $cantidadSeleccionada; ?>"required>
 <br>
-
-<button type= "submit">
-
-Enviar Pedido
+<button type="submit">
+<?php
+if($modoEditar){
+    echo "Guardar Cambios";
+}else{
+    echo "Enviar Pedido";
+}
+?>
 
 </button>
 
 <div class="botones">
 
-<a href="menu.php">
+<a href="<?php echo $modoEditar ? 'pedidos.php' : 'menu.php'; ?>">
+<?php
+if($modoEditar){
+    echo "← Volver a Mis Pedidos";
+}else{
+    echo "← Volver al Menú";
+}
 
-← Volver al Menú
-
+?>
 </a>
-
 <a href="index.php">
 
 🏠 Inicio

@@ -93,6 +93,19 @@
         background:#b71c1c;
         color:white;
     }
+    .btnEditar{
+        background:#1976d2;
+        color:white;
+        padding:8px 16px;
+        border-radius:5px;
+        text-decoration:none;
+        font-weight:bold;
+        transition:.3s;
+    }
+    .btnEditar:hover{
+        background:#125ea9;
+        color:white;
+    }
     .estado{
         display:inline-block;
         padding:6px 12px;
