@@ -34,23 +34,71 @@ password.addEventListener("input", function(){
 });
 formulario.addEventListener("submit", function(e){
 
+    const nombre = document.getElementById("nombre").value.trim();
+    const apellido = document.getElementById("apellido").value.trim();
+    const correo = document.getElementById("correo").value.trim();
+    const usuario = document.getElementById("usuario").value.trim();
     const contrasena = document.getElementById("contrasena").value;
     const confirmar = document.getElementById("contrasena2").value;
-    const correo = document.getElementById("correo").value;
+    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+
+    if(!soloLetras.test(nombre)){
+        alert("El nombre solo puede contener letras.");
+        e.preventDefault();
+        return;
+    }
+
+    if(!soloLetras.test(apellido)){
+        alert("El apellido solo puede contener letras.");
+        e.preventDefault();
+        return;
+    }
 
     if(!correo.includes("@")){
-        alert("Ingrese un correo electrónico válido.");
+        alert("Ingrese un correo válido.");
         e.preventDefault();
         return;
-    }
-    if(contrasena.length < 6){
-        alert("La contraseña debe tener al menos 6 caracteres.");
-        e.preventDefault();
-        return;
-    }
-    if(contrasena !== confirmar){
-        alert("Las contraseñas no coinciden.");
-        e.preventDefault();
     }
 
+    if(usuario.includes(" ")){
+        alert("El usuario no puede contener espacios.");
+        e.preventDefault();
+        return;
+    }
+
+    if(usuario.length < 4){
+        alert("El usuario debe tener al menos 4 caracteres.");
+        e.preventDefault();
+        return;
+    }
+
+    if(contrasena.length < 8){
+        alert("La contraseña debe tener mínimo 8 caracteres.");
+        e.preventDefault();
+        return;
+    }
+
+    if(!/[A-Z]/.test(contrasena)){
+        alert("La contraseña debe tener una letra mayúscula.");
+        e.preventDefault();
+        return;
+    }
+
+    if(!/[a-z]/.test(contrasena)){
+        alert("La contraseña debe tener una letra minúscula.");
+        e.preventDefault();
+        return;
+    }
+
+    if(!/[0-9]/.test(contrasena)){
+        alert("La contraseña debe tener un número.");
+        e.preventDefault();
+        return;
+    }
+
+    if(contrasena!=confirmar){
+        alert("Las contraseñas no coinciden.");
+        e.preventDefault();
+        return;
+    }
 });
