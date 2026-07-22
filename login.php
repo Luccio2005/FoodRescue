@@ -1,35 +1,65 @@
 <?php
+
 session_start();
 include("conexion.php");
 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-
-    $usuario = trim($_POST["usuario"]);
-    $contrasena = trim($_POST["contrasena"]);
-
-    $sql="SELECT * FROM usuarios
-          WHERE usuario='$usuario'
-          AND contrasena='$contrasena'";
-
-    $resultado=$conexion->query($sql);
-
-    if($resultado->num_rows>0){
-
-        $fila = $resultado->fetch_assoc();
-        $_SESSION["id_usuario"] = $fila["id_usuario"];
-        $_SESSION["usuario"] = $fila["usuario"];
-
-        header("Location: index.php");
-        exit();
-
-    }else{
-
-        echo "<script>alert('Usuario o contraseña incorrectos');</script>";
-
-    }
-
+if(isset($_SESSION["id_usuario"])){
+    header("Location: index.php");
+    exit();
 }
 
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+
+    $usuario = trim($_POST["usuario"] ?? "");
+    $contrasena = $_POST["contrasena"] ?? "";
+
+    if($usuario === ""){
+        mostrarErrorLogin("Ingrese su usuario.");
+    }
+
+    if($contrasena === ""){
+        mostrarErrorLogin("Ingrese su contraseña.");
+    }
+
+    if(strlen($usuario) < 4 || strlen($usuario) > 50){
+        mostrarErrorLogin("El usuario ingresado no es válido.");
+    }
+
+    if(preg_match("/\s/", $usuario)){
+        mostrarErrorLogin("El usuario no puede contener espacios.");
+    }
+
+    $sql = $conexion->prepare(
+        "SELECT id_usuario, usuario, contrasena
+         FROM usuarios
+         WHERE usuario = ?"
+    );
+
+    $sql->bind_param("s", $usuario);
+    $sql->execute();
+    $resultado = $sql->get_result();
+
+    if($resultado->num_rows === 0){
+        mostrarErrorLogin("El usuario no existe.");
+    }
+    $fila = $resultado->fetch_assoc();
+    if($contrasena !== $fila["contrasena"]){
+        mostrarErrorLogin("La contraseña es incorrecta.");
+    }
+    $_SESSION["id_usuario"] = $fila["id_usuario"];
+    $_SESSION["usuario"] = $fila["usuario"];
+    header("Location: index.php");
+    exit();
+}
+
+function mostrarErrorLogin($mensaje){
+    $mensajeSeguro = json_encode($mensaje);
+    echo "<script>
+            alert($mensajeSeguro);
+            window.history.back();
+          </script>";
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -74,12 +104,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         <main class="formulario">
         <form action="" method="POST" id="formLogin">
             <label for="usuario">Usuario</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" required /> <br><br>
+            <input type="text" id="usuario" name="usuario" minlength="4" maxlength="50" 
+                placeholder="Ingrese su usuario" autocomplete="username" required /> <br><br>
             <label for="contrasena">Contraseña</label>
 
                 <div class="contenedorPassword">
                     <input
-                        type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
+                        type="password" id="contrasena" name="contrasena" maxlength="50"
+                        placeholder="Ingrese su contraseña" autocomplete="current-password" required>
                 <button
                     type="button"
                     id="mostrarPassword">
