@@ -125,6 +125,43 @@
         background:#F8D7DA;
         color:#721C24;
     }
+    .sinPedidos{
+    max-width:650px;
+    margin:40px auto;
+    padding:45px 30px;
+    background:white;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.12);
+    text-align:center;
+    animation:aparecer .8s ease;
+    }
+    .iconoSinPedidos{
+        font-size:70px;
+        margin-bottom:10px;
+    }
+    .sinPedidos h2{
+        color:var(--colorPrincipal);
+        font-size:28px;
+        margin-bottom:10px;
+    }
+    .sinPedidos p{
+        max-width:500px;
+        margin:0 auto 25px;
+    }
+    .btnPrimerPedido{
+        display:inline-block;
+        background:var(--colorPrincipal);
+        color:white;
+        padding:12px 22px;
+        border-radius:6px;
+        font-weight:bold;
+        transition:.3s;
+    }
+    .btnPrimerPedido:hover{
+        color:white;
+        opacity:.85;
+        transform:translateY(-2px);
+    }
     /* TABLETS  */
     @media (max-width:768px){
         .tabla{

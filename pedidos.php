@@ -67,79 +67,123 @@ $resultado = $conexion->query($sql);
             ?>
             </div>
         </header>
-        <div class="herramientas">
-            <input
-            type="text"
-            id="buscarPedido"
-            placeholder="🔍 Buscar pedido..."
-            >
-        <select id="filtroEstado">
+        <main class="tabla">
 
-        <option value="Todos">Todos</option>
+<?php
+if($resultado && $resultado->num_rows > 0){
+?>
+
+<div class="herramientas">
+    <input
+        type="text"
+        id="buscarPedido"
+        placeholder="🔍 Buscar por número, cliente o producto..."
+    >
+    <select id="filtroEstado">
+        <option value="Todos">Todos los estados</option>
         <option value="Pendiente">Pendiente</option>
         <option value="Entregado">Entregado</option>
         <option value="Cancelado">Cancelado</option>
-        </select>
-        </div>
-        <br>
-        <main class="tabla">
+    </select>
+</div>
         <table border="1">
             <thead>
-            <tr>
-                <th>N° de Pedido</th>
-                <th>Fecha</th>
-                <th>Cliente</th>
-                <th>Productos Seleccionados</th>
-                <th>Cantidad</th>
-                <th>Total</th>
-                <th>Estado</th>
-                <th>Acción</th>
-            </tr>
+                <tr>
+                    <th>N° de Pedido</th>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Productos Seleccionados</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
             </thead>
             <tbody>
             <?php
             while($fila = $resultado->fetch_assoc()){
             ?>
-            <tr>
-            <td><?php echo $fila["id_pedido"]; ?></td>
-            <td><?php echo $fila["fecha"]; ?></td>
-            <td><?php echo $fila["nombre_cliente"]; ?></td>
-            <td><?php echo $fila["producto"]; ?></td>
-            <td><?php echo $fila["cantidad"]; ?></td>
-            <td>S/. <?php echo $fila["total"]; ?></td>
-            <td>
-            <?php
-                if($fila["estado"]=="Pendiente"){
-                    echo "<span class='estado pendiente'> Pendiente</span>";
-                }elseif($fila["estado"]=="Entregado"){
-                    echo "<span class='estado entregado'> Entregado</span>";
-                }else{
-                    echo "<span class='estado cancelado'> Cancelado</span>";
-                }
-            ?>
-            </td>
-            <td>
-            <?php
-                if($fila["estado"]=="Pendiente"){
-            ?>
-            <a href="form_pedido.php?editar=<?php echo $fila["id_pedido"]; ?>"
-                class="btnEditar"> Editar </a> <br><br>
-            <a href="cancelar_pedido.php?id=<?php echo $fila["id_pedido"]; ?>"
-                class="btnCancelar" 
-                onclick="return confirm('¿Seguro que deseas cancelar este pedido?');">
-                Cancelar </a>
-            <?php
-                }else{
-                    echo "-";
-                }
-            ?>
-            </td>
-            </tr>
+                <tr>
+                    <td>
+                        <?php echo $fila["id_pedido"]; ?>
+                    </td>
+                    <td>
+                        <?php echo date("d/m/Y H:i", strtotime($fila["fecha"])); ?>
+                    </td>
+                    <td>
+                        <?php echo htmlspecialchars($fila["nombre_cliente"]); ?>
+                    </td>
+                    <td>
+                        <?php echo htmlspecialchars($fila["producto"]); ?>
+                    </td>
+                    <td>
+                        <?php echo $fila["cantidad"]; ?>
+                    </td>
+                    <td>
+                        S/. <?php echo number_format($fila["total"], 2); ?>
+                    </td>
+                    <td>
+                        <?php
+                        if($fila["estado"] == "Pendiente"){
+                            echo "<span class='estado pendiente'>Pendiente</span>";
+                        }elseif($fila["estado"] == "Entregado"){
+                            echo "<span class='estado entregado'>Entregado</span>";
+                        }elseif($fila["estado"] == "Cancelado"){
+                            echo "<span class='estado cancelado'>Cancelado</span>";
+                        }else{
+                            echo "<span class='estado'>".
+                                htmlspecialchars($fila["estado"]).
+                                "</span>";
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        if($fila["estado"] == "Pendiente"){
+                        ?>
+                            <a
+                                href="form_pedido.php?editar=<?php echo $fila["id_pedido"]; ?>"
+                                class="btnEditar">
+                                Editar
+                            </a>
+                            <br><br>
+                            <a
+                                href="cancelar_pedido.php?id=<?php echo $fila["id_pedido"]; ?>"
+                                class="btnCancelar"
+                                onclick="return confirm('¿Seguro que deseas cancelar este pedido?');">
+                                Cancelar
+                            </a>
+                        <?php
+                        }else{
+                            echo "-";
+                        }
+                        ?>
+                    </td>
+                </tr>
             <?php
             }
             ?>
             </tbody>
         </table>
+        <?php
+        }else{
+        ?>
+        <div class="sinPedidos">
+            <div class="iconoSinPedidos">
+                📦
+            </div>
+            <h2>Aún no has realizado pedidos</h2>
+            <p>
+                Explora nuestro menú y encuentra alimentos de calidad
+                a precios especiales.
+            </p>
+            <a href="menu.php" class="btnPrimerPedido">
+                🍕 Realizar mi primer pedido
+            </a>
+        </div>
+        <?php
+        }
+        ?>
         </main>
         <section class="botones">
         <a href="menu.php">Menu de Comidas</a><br><br>

@@ -201,15 +201,18 @@ function mostrarErrorRegistro($mensaje){
             <input type="email" maxlength="50" id="correo" name="correo" 
                 placeholder="Ingrese su correo" autocomplete="email" required /><br><br>
             <label for="usuario">Crea un usuario</label>
-            <input type="text" maxlength="50" id="usuario" name="usuario" placeholder="Ingrese un usuario" required /><br><br>
+            <input type="text" maxlength="50" minlength="4" id="usuario" name="usuario" 
+                placeholder="Ingrese un usuario" autocomplete="username" required /><br><br>
             <label for="contrasena">Crea una Contraseña</label>
-            <input type="password" maxlength="50" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña" required /><br><br>
+            <input type="password" maxlength="50" minlength="8" id="contrasena" name="contrasena" 
+                placeholder="Ingrese una contraseña" autocomplete="new-password" required /><br><br>
             <div class="barraSeguridad">
                 <div id="nivelPassword"></div>
                 </div>
                 <p id="textoPassword">Seguridad de la contraseña</p><br>
             <label for="contrasena2">Confirmar Contraseña</label>
-            <input type="password" maxlength="50" id="contrasena2" name="contrasena2" placeholder="Vuelva a colocar contraseña" required /><br><br>
+            <input type="password" maxlength="50" minlength="8" id="contrasena2" name="contrasena2" 
+                placeholder="Vuelva a colocar contraseña" autocomplete="new-password" required /><br><br>
             <input type="submit" value="Registrar" /><br>
             <a href="login.php">Volver al inicio de sesion</a>
         </form>
